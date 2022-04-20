@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import userRoute from './route/user.route'
 
 //setup database
 mongoose.connect('mongodb://localhost:27017/userCrud')
@@ -7,10 +8,8 @@ mongoose.connect('mongodb://localhost:27017/userCrud')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.use('/',userRoute)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Listening to port ${port}`)
 })
