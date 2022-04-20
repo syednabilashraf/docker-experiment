@@ -1,19 +1,19 @@
-import express from 'express'
-import {
+const express = require('express');
+const {
     createUser,
     getUsers,
     patchUser,
     removeUser
-} from '../controller/user.controller'
+} = require('../controller/user.controller');
 
-const router = express.Router()
+const router = express.Router();
 
 router.route('/api/users')
     .get(getUsers)
-    .post(createUser)
+    .post(createUser);
 
 router.route('/api/users/:id')
     .patch(patchUser)
-    .delete(removeUser)
+    .delete(removeUser);
 
-export default router
+module.exports = router;
