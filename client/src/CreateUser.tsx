@@ -71,8 +71,10 @@ export default function CreateUser({ handleCloseCreateUserModal, handleCreateUse
                     type="number"
                     onChange={handleInputChange}
                 />
-                <Button onClick={handleCloseCreateUserModal}>Cancel</Button>
-                <Button type = "submit">Submit</Button>
+                <div>
+                    <Button onClick={handleCloseCreateUserModal}>Cancel</Button>
+                    <Button type="submit">Submit</Button>
+                </div>
             </Card >
         </form>
     )

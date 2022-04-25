@@ -30,12 +30,12 @@
 
 .editUserForm {
   display: flex;
-  flex:2;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 70%;
-  height: 90%;
+  height: 50%;
+  margin-top: 10%;
 }
 
 .deleteUserForm {
@@ -58,10 +58,26 @@
 .deleteCard {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 30%;
-  height: 20%;
+  width: 25%;
+  height: 15%;
+}
+
+.homePage {
+  width: 79%;
+  margin-bottom: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+.userTable {
+  margin-bottom: 2%;
+}
+
+.createButton {
+  margin-top: 2%;
 }
 
 @keyframes App-logo-spin {

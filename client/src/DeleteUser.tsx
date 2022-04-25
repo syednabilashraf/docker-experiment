@@ -14,7 +14,7 @@ export default function DeleteUser({ user, selectedUserIndex, handleCloseDeleteU
     return (
         <div className="deleteUserForm">
             <Card className="deleteCard">
-                <Typography>Are you sure?</Typography>
+                <Typography variant="h4">Are you sure?</Typography>
                 <div>
                     <Button onClick={handleCloseDeleteUserModal}>Cancel</Button>
                     <Button onClick={handleDelete}>Confirm</Button>

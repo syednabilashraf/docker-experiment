@@ -61,8 +61,8 @@ export default function UsersTable({ users, setUsers }: { users: Users | [], set
     }
 
     return (
-        <>
-            <TableContainer component={Paper}>
+        <div className = 'userTable'>
+            <TableContainer component={Paper} >
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -121,6 +121,6 @@ export default function UsersTable({ users, setUsers }: { users: Users | [], set
                 />
             </Modal>
 
-        </>
+        </div>
     );
 }

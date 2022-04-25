@@ -25,7 +25,7 @@ export default function EditUser({ user, selectedUserIndex, handleCloseEditUserM
                 handleEditUser(selectedUserIndex, editedUser);
                 handleCloseEditUserModal()
             }
-        ).catch(err => console.log('err',err))
+        ).catch(err => console.log('err', err))
     }
 
     return (
@@ -69,11 +69,13 @@ export default function EditUser({ user, selectedUserIndex, handleCloseEditUserM
                     defaultValue={user.mobileNumber}
                     className="textField"
                     name="mobileNumber"
-                    type ="number"
+                    type="number"
                     onChange={handleInputChange}
                 />
-                <Button onClick={handleCloseEditUserModal}>Cancel</Button>
-                <Button type="submit">Submit</Button>
+                <div>
+                    <Button onClick={handleCloseEditUserModal}>Cancel</Button>
+                    <Button type="submit">Submit</Button>
+                </div>
             </Card >
         </form>
     )

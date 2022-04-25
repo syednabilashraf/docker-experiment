@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getUsers } from './service';
 import { Users, User } from './types/homepage';
+import './App.css'
 
 export default function HomePage() {
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
-  const [users, setUsers] = useState<any >([])
+  const [users, setUsers] = useState<any>([])
   useEffect(() => {
     getUsers().then((res) => {
       console.log(res)
@@ -31,8 +32,11 @@ export default function HomePage() {
 
   return (
     <>
-      <UsersTable users={users} setUsers={setUsers} />
-      <Button variant="contained" onClick={handleOpenCreateUserModal}>Create User</Button>
+      <div className='homePage'>
+        <UsersTable users={users} setUsers={setUsers} />
+        <Button variant="contained" onClick={handleOpenCreateUserModal} className='createButton'>Create User</Button>
+      </div>
+
       <Modal
         open={openCreateUserModal}
         onClose={handleCloseCreateUserModal}
