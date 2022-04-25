@@ -1,0 +1,46 @@
+version: "3"
+services:
+  
+  client:
+   build: ./client
+   ports:
+    -  3000:3000
+   container_name: naruhodo-client
+   networks:
+    -  local
+   volumes:
+    -  ./client/src:/client/src
+    -  ./client/public:/client/public
+   depends_on:
+    - server
+   stdin_open: true
+   tty: true
+
+  server:
+   build: ./server
+   ports:
+     - 3001:3001
+   container_name: naruhodo-server
+   networks:
+     - local
+   volumes:
+    - ./api/src:/server/src
+   depends_on:
+    - mongodb
+
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-db
+    networks:
+      - local
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  local:
+
+volumes:
+  mongo-data:
+    driver: local

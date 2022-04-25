@@ -3,20 +3,16 @@ import UsersTable from './UsersTable';
 import CreateUser from './CreateUser';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-console.log("papiam")
+import { getUsers } from './service';
+import { Users } from './types/homepage';
+
 export default function HomePage() {
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
   const [users, setUsers] = useState([])
   useEffect(() => {
-    console.log("hello")
-    const getUsers = async () => {
-      const result = await axios.get('http://naruhodo_server:3001/api/users');
-      console.log(result)
-      console.log(result)
-      console.log(result)
-
-    }
-    getUsers()
+    getUsers().then((res) => {
+      console.log(res)
+    })
   }, [])
   const handleOpenCreateUserModal = (e: any) => {
     setOpenCreateUserModal(true);
@@ -29,7 +25,7 @@ export default function HomePage() {
   return (
     <>
       <UsersTable />
-      <Button variant="contained" onClick={handleOpenCreateUserModal}>Create User</Button>
+      <Button variant="contained" onClick={handleOpenCreateUserModal}>Create aUser</Button>
       <Modal
         open={openCreateUserModal}
         onClose={handleCloseCreateUserModal}
