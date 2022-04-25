@@ -5,7 +5,7 @@ import './App.css';
 import { useState } from "react";
 import { patchUser } from "./service";
 
-export default function EditUser({ user, handleCloseEditUserModal }: any) {
+export default function EditUser({ user, selectedUserIndex, handleCloseEditUserModal, handleEditUser }: any) {
     const [editedUser, setEditedUser] = useState(user);
 
     const handleInputChange = (e: any) => {
@@ -21,10 +21,13 @@ export default function EditUser({ user, handleCloseEditUserModal }: any) {
         e.preventDefault()
         patchUser(editedUser, editedUser._id).then(
             (res) => {
-                setEditedUser(res);
+                console.log('ressy', res)
+                handleEditUser(selectedUserIndex, editedUser);
+                handleCloseEditUserModal()
             }
-        )
+        ).catch(err => console.log('err',err))
     }
+
     return (
         <form className="form" onSubmit={handleSubmit}>
             <Card className="editUserForm">
@@ -56,7 +59,7 @@ export default function EditUser({ user, handleCloseEditUserModal }: any) {
                     className="textField"
                     name="email"
                     onChange={handleInputChange}
-                    
+
 
                 />
                 <TextField
@@ -66,6 +69,7 @@ export default function EditUser({ user, handleCloseEditUserModal }: any) {
                     defaultValue={user.mobileNumber}
                     className="textField"
                     name="mobileNumber"
+                    type ="number"
                     onChange={handleInputChange}
                 />
                 <Button onClick={handleCloseEditUserModal}>Cancel</Button>

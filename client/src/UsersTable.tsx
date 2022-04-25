@@ -25,34 +25,40 @@ function createData(
     return { firstName, lastName, email, mobileNumber };
 }
 
-export default function UsersTable({ users }: { users: Users | []}) {
+export default function UsersTable({ users, setUsers }: { users: Users | [], setUsers: any }) {
     console.log('table', users)
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
-    const [selectedUser, setSelectedUser] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        mobileNumber: 0
-    })
+    const [selectedUserIndex, setSelectedUserIndex] = useState(0)
 
-    const handleOpenEditUserModal = (user: User) => (e: any) => {
+    const handleOpenEditUserModal = (index: number) => (e: any) => {
         setOpenEditUserModal(true);
-        setSelectedUser(user)
+        setSelectedUserIndex(index)
     }
 
     const handleCloseEditUserModal = (e: any) => {
         setOpenEditUserModal(false);
     }
-    const handleOpenDeleteUserModal = (user: User) => (e: any) => {
+    const handleOpenDeleteUserModal = (index: number) => (e: any) => {
         setOpenDeleteUserModal(true);
-        setSelectedUser(user)
+        setSelectedUserIndex(index)
     }
 
     const handleCloseDeleteUserModal = (e: any) => {
         setOpenDeleteUserModal(false);
     }
 
+    const handleEditUser = (userIndex: number, user: User) => {
+        const newUsers = [...users];
+        newUsers[userIndex] = user;
+        setUsers(newUsers)
+    }
+
+    const handleDeleteUser = (userIndex: number) => {
+        const newUsers = [...users];
+        newUsers.splice(userIndex, 1);
+        setUsers(newUsers);
+    }
 
     return (
         <>
@@ -80,8 +86,8 @@ export default function UsersTable({ users }: { users: Users | []}) {
                                 <TableCell align="right">{user.email}</TableCell>
                                 <TableCell align="right">{user.mobileNumber}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton onClick={handleOpenEditUserModal(user)}><EditIcon /></IconButton>
-                                    <IconButton onClick={handleOpenDeleteUserModal(user)} ><DeleteIcon /></IconButton>
+                                    <IconButton onClick={handleOpenEditUserModal(index)}><EditIcon /></IconButton>
+                                    <IconButton onClick={handleOpenDeleteUserModal(index)} ><DeleteIcon /></IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -94,7 +100,12 @@ export default function UsersTable({ users }: { users: Users | []}) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <EditUser user={selectedUser} handleCloseEditUserModal={handleCloseEditUserModal} />
+                <EditUser
+                    user={users[selectedUserIndex]}
+                    selectedUserIndex={selectedUserIndex}
+                    handleCloseEditUserModal={handleCloseEditUserModal}
+                    handleEditUser={handleEditUser}
+                />
             </Modal>
             <Modal
                 open={openDeleteUserModal}
@@ -102,7 +113,12 @@ export default function UsersTable({ users }: { users: Users | []}) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <DeleteUser user={selectedUser} handleCloseDeleteUserModal={handleCloseDeleteUserModal} />
+                <DeleteUser
+                    user = {users[selectedUserIndex]}
+                    selectedUserIndex={selectedUserIndex}
+                    handleDeleteUser={handleDeleteUser}
+                    handleCloseDeleteUserModal={handleCloseDeleteUserModal}
+                />
             </Modal>
 
         </>

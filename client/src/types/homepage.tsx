@@ -19,7 +19,7 @@ export type User = {
     lastName: string,
     email: string,
     mobileNumber: number
-    _id?: string
+    _id: string
 }
 
 

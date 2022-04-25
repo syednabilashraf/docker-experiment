@@ -13,7 +13,7 @@ export const createUser = async (user: User) => {
 
 export const patchUser = async (user: User, id: string) => {
 
-        const response: User = await axios.patch(`/api/users/${id}`, user).catch(err => err);
+        const response: User = await axios.patch(`/api/users/${id}`, user)
         console.log('res', response)
         return response;
 }
