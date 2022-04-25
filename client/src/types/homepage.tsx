@@ -10,6 +10,10 @@ export type DeleteUserProp = {
     handleCloseDeleteUserModal: any
 }
 
+export type CreateUserProp = {
+    handleCloseCreateUserModal: any
+}
+
 export type User = {
     firstName: string,
     lastName: string,
