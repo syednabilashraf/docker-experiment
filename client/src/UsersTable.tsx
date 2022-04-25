@@ -25,17 +25,10 @@ function createData(
     return { firstName, lastName, email, mobileNumber };
 }
 
-const rows = [
-    createData('nabil', 'ashraf', 'nabil@gmail.com', 123456),
-    createData('nabil', 'ashraf', 'nabil@gmail.com', 123456),
-    createData('nabil', 'ashraf', 'nabil@gmail.com', 123456),
-    createData('nabil', 'ashraf', 'nabil@gmail.com', 123456)
-];
-
-export default function UsersTable({ }) {
+export default function UsersTable({ users }: { users: Users | []}) {
+    console.log('table', users)
     const [openEditUserModal, setOpenEditUserModal] = useState(false);
     const [openDeleteUserModal, setOpenDeleteUserModal] = useState(false);
-
     const [selectedUser, setSelectedUser] = useState({
         firstName: "",
         lastName: "",
@@ -75,20 +68,20 @@ export default function UsersTable({ }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row, index) => (
+                        {users.map((user, index) => (
                             <TableRow
                                 key={index}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.firstName}
+                                    {user.firstName}
                                 </TableCell>
-                                <TableCell align="right">{row.lastName}</TableCell>
-                                <TableCell align="right">{row.email}</TableCell>
-                                <TableCell align="right">{row.mobileNumber}</TableCell>
+                                <TableCell align="right">{user.lastName}</TableCell>
+                                <TableCell align="right">{user.email}</TableCell>
+                                <TableCell align="right">{user.mobileNumber}</TableCell>
                                 <TableCell align="right">
-                                    <IconButton onClick={handleOpenEditUserModal(row)}><EditIcon /></IconButton>
-                                    <IconButton onClick={handleOpenDeleteUserModal(row)} ><DeleteIcon /></IconButton>
+                                    <IconButton onClick={handleOpenEditUserModal(user)}><EditIcon /></IconButton>
+                                    <IconButton onClick={handleOpenDeleteUserModal(user)} ><DeleteIcon /></IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

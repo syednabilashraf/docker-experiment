@@ -8,11 +8,12 @@ import { Users } from './types/homepage';
 
 export default function HomePage() {
   const [openCreateUserModal, setOpenCreateUserModal] = useState(false);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState<Users | []>([])
   useEffect(() => {
     getUsers().then((res) => {
       console.log(res)
-    })
+      setUsers(res)
+    }).catch(err => console.log(err))
   }, [])
   const handleOpenCreateUserModal = (e: any) => {
     setOpenCreateUserModal(true);
@@ -24,8 +25,8 @@ export default function HomePage() {
 
   return (
     <>
-      <UsersTable />
-      <Button variant="contained" onClick={handleOpenCreateUserModal}>Create aUser</Button>
+      <UsersTable users={users}/>
+      <Button variant="contained" onClick={handleOpenCreateUserModal}>Create User</Button>
       <Modal
         open={openCreateUserModal}
         onClose={handleCloseCreateUserModal}

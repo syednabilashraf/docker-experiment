@@ -19,7 +19,8 @@ export type User = {
     lastName: string,
     email: string,
     mobileNumber: number
+    _id?: string
 }
 
 
-export type Users = [User]
+export type Users = User[]
