@@ -4,13 +4,17 @@ const mongoose = require('mongoose');
 const userRoute = require('./route/user.route');
 
 //setup database
-mongoose.connect('mongodb://localhost:27017/userCrud')
+
+mongoose.connect('mongodb://mongo-db:27017/userCrud')
+mongoose.connection.on('error', () => {
+    throw new Error(`unable to connect to database`)
+})
+
 //setup express app
 const app = express();
-const port = 3000;
+const port = 3001;
 app.use(bodyparser.json())
 app.use('/', userRoute);
-
 app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 })
